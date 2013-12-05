@@ -25,6 +25,7 @@
 @property (nonatomic,retain) NSMutableArray *screenShotsList;
 
 @property (nonatomic,assign) BOOL isMoving;
+@property (nonatomic,assign) BOOL ignoreDragging;
 
 @end
 
@@ -67,6 +68,8 @@
     //self.view.layer.shadowOffset = CGSizeMake(5, 5);
     //self.view.layer.shadowRadius = 5;
     //self.view.layer.shadowOpacity = 1;
+    
+    _draggingBackArea = 1.0;
     
     UIImageView *shadowImageView = [[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"leftside_shadow_bg"]]autorelease];
     shadowImageView.frame = CGRectMake(-10, 0, 10, TOP_VIEW.frame.size.height);
@@ -175,6 +178,14 @@
     // begin paning, show the backgroundView(last screenshot),if not exist, create it.
     if (recoginzer.state == UIGestureRecognizerStateBegan) {
         
+        if (_draggingBackArea < 1.0 &&
+            touchPoint.x > TOP_VIEW.frame.size.width * _draggingBackArea)
+        {
+            _ignoreDragging = YES;
+            return;
+        }
+        
+        _ignoreDragging = NO;
         _isMoving = YES;
         startTouch = touchPoint;
         
@@ -200,6 +211,9 @@
         
         //End paning, always check that if it should move right or move left automatically
     }else if (recoginzer.state == UIGestureRecognizerStateEnded){
+        
+        if (_ignoreDragging)
+            return;
         
         if (touchPoint.x - startTouch.x > 50)
         {

@@ -16,4 +16,8 @@
 // Indicating whether the last back action is dragged by user.
 @property (nonatomic,assign) BOOL isDraggedBack;
 
+// Custom the dragging back area as part of screen start from left side.
+// default is 1.0f, meaning the full screen can respond dragging start.
+@property (nonatomic,assign) CGFloat draggingBackArea;
+
 @end
