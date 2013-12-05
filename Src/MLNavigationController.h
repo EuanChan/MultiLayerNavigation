@@ -13,4 +13,7 @@
 // Enable the drag to back interaction, Defalt is YES.
 @property (nonatomic,assign) BOOL canDragBack;
 
+// Indicating whether the last back action is dragged by user.
+@property (nonatomic,assign) BOOL isDraggedBack;
+
 @end

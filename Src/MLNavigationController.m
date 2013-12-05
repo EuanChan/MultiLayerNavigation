@@ -108,6 +108,7 @@
         [self.screenShotsList addObject:capturedImage];
     }
 
+    _isDraggedBack = NO;
     [super pushViewController:viewController animated:animated];
 }
 
@@ -206,6 +207,7 @@
                 [self moveViewWithX:320];
             } completion:^(BOOL finished) {
                 
+                _isDraggedBack = YES;
                 [self popViewControllerAnimated:NO];
                 CGRect frame = TOP_VIEW.frame;
                 frame.origin.x = 0;
