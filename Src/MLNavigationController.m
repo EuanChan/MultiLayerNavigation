@@ -141,8 +141,6 @@
 // set lastScreenShotView 's position and alpha when paning
 - (void)moveViewWithX:(float)x
 {
-    
-    NSLog(@"Move to:%f",x);
     x = x>320?320:x;
     x = x<0?0:x;
     
@@ -155,7 +153,6 @@
 
     lastScreenShotView.transform = CGAffineTransformMakeScale(scale, scale);
     blackMask.alpha = alpha;
-    
 }
 
 #pragma mark - UIGestureRecognizerDelegate
